@@ -17,8 +17,6 @@ private:
     NeuronControllerRepository ncr;
     Ticker tkr;
 
-    void incrementTick();
-
 public:
     explicit Brain(): ncr(NeuronControllerRepository()), tkr(Ticker()) {};
 

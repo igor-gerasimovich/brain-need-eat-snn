@@ -1,3 +1,12 @@
+# 03.11.2019
+- removed infinite cycle from brain proceed
+- a removed redundant function definition in brain.h
+- created neuron connection class
+- created signal class
+- added functionality: attaching connections, proceed inside the neuron and sending signals to other connected neurons.
+- removed redundant code in `main.cpp`
+- now the app can be built and ran without any errors
+
 # 31.10.2019
 - created elements factories.
 - created main repositories.
