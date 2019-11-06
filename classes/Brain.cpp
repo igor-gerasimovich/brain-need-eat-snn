@@ -4,18 +4,46 @@
 
 #include <iostream>
 #include "Brain.h"
+#include "factories/NeuronControllerFactory.h"
 
 void Brain::proceed() {
     while (true) {
         tkr.incrementTick();
-        std::cout << "Tick " << tkr.getCurrentTick()->getTickNumber() << std::endl;
+        // std::cout << "Tick " << tkr.getCurrentTick()->getTickNumber() << std::endl;
 
         for(auto &controller: ncr.controllers) {
             controller.proceedTick(tkr.getCurrentTick());
         }
 
-        if (tkr.getCurrentTick()->getTickNumber() > 99) {
+        if (tkr.getCurrentTick()->getTickNumber() % 5 == 0) {
+            ncr.controllers[0].addSignal(Signal(100, 0));
+            ncr.controllers[3].addSignal(Signal(300, 0));
+        }
+
+
+        if (tkr.getCurrentTick()->getTickNumber() > 15) {
             break;
+        }
+    }
+}
+
+void Brain::createStructure(int levels, int neuronsPerLevel) {
+    for (int i = 0; i < levels; i++) {
+        for (int j = 0; j < neuronsPerLevel; j++) {
+            NeuronController neuronController = NeuronControllerFactory::createNeuronController(&nr);
+
+            ncr.addNeuron(neuronController);
+        }
+    }
+
+    for (int i = 0; i + 1 < levels; i++) {
+        for (int j = 0; j < neuronsPerLevel; j++) {
+            for (int k = 0; k < neuronsPerLevel; k++) {
+                NeuronController* fromNC = &ncr.controllers[ (i * neuronsPerLevel) + j ];
+                NeuronController* toNC = &ncr.controllers[ ((i + 1) * neuronsPerLevel) + k ];
+
+                fromNC->addNeuronConnection(toNC, toNC->getId());
+            }
         }
     }
 }

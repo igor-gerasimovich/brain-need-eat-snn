@@ -5,6 +5,8 @@
 #ifndef BRAIN_NEED_EAT_NEURON_H
 #define BRAIN_NEED_EAT_NEURON_H
 
+#include "vector"
+#include "iostream"
 
 class Neuron {
 private:
@@ -13,8 +15,14 @@ private:
     unsigned long disabled_to_tick = 0;
     unsigned long repository_place = 0;
 
+    std::vector<bool> spikesHistory{};
+    std::vector<int> powerHistory{};
+
 public:
-    explicit Neuron() = default;
+    explicit Neuron() {
+        spikesHistory.reserve(100);
+        powerHistory.reserve(100);
+    };
 
     unsigned long getId() {
         return id;
@@ -42,6 +50,22 @@ public:
     }
     unsigned long getRepositoryPlace() {
         return repository_place;
+    }
+
+
+    // Statistics
+    void addToSpikeHistory(bool hasSpike) {
+        spikesHistory.push_back(hasSpike);
+    }
+    std::vector<bool> getSpikesHistory() {
+        return spikesHistory;
+    }
+
+    void addToPowerHistory(int hasSpike) {
+        powerHistory.push_back(hasSpike);
+    }
+    std::vector<int> getPowerHistory() {
+        return powerHistory;
     }
 };
 

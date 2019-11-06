@@ -1,3 +1,9 @@
+# 06.11.2019
+- created simples neuron structure generator
+- created drawer class which works with matplotlib
+- added 2 statistic vectors for neuron class
+- added neuron loss per tick (need debug) currently has graphs
+
 # 03.11.2019
 - removed infinite cycle from brain proceed
 - a removed redundant function definition in brain.h

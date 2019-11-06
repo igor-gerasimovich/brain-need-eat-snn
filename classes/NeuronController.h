@@ -45,6 +45,10 @@ public:
         return id;
     }
 
+    Neuron* getNeuron() {
+        return neuron;
+    }
+
     bool hasSpike();
     void proceedTick(Tick* tick);
     void proceedSpike(Tick* tick);

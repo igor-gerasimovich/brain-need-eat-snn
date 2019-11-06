@@ -11,16 +11,21 @@
 #include "NeuronController.h"
 #include "repositories/NeuronConrollerRepository.h"
 #include "Ticker.h"
+#include "repositories/NeuronRepository.h"
 
 class Brain {
 private:
-    NeuronControllerRepository ncr;
     Ticker tkr;
 
 public:
-    explicit Brain(): ncr(NeuronControllerRepository()), tkr(Ticker()) {};
+    NeuronControllerRepository ncr;
+    NeuronRepository nr;
+
+    explicit Brain(): ncr(NeuronControllerRepository()), tkr(Ticker()), nr(NeuronRepository()) {};
 
     void proceed();
+
+    void createStructure(int levels, int neuronsPerLevel);
 };
 
 

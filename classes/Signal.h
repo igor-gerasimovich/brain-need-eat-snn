@@ -8,12 +8,17 @@
 class Signal {
 private:
     int power;
+    long unsigned fromId;
 
 public:
-    explicit Signal(int newPower): power(newPower) {}
+    explicit Signal(int newPower, long unsigned newFromId): power(newPower), fromId(newFromId) {}
 
     int getPower() {
         return power;
+    }
+
+    long unsigned getFomId() {
+        return fromId;
     }
 };
 
