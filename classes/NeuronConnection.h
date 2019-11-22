@@ -11,7 +11,11 @@ private:
     unsigned long target_neuron_controller_id;
 
 public:
-    explicit NeuronConnection(unsigned long targetNeuronControllerId): target_neuron_controller_id(targetNeuronControllerId) {}
+    std::vector<long unsigned>multipliers{};
+
+    explicit NeuronConnection(unsigned long targetNeuronControllerId): target_neuron_controller_id(targetNeuronControllerId) {
+        multipliers.reserve(300);
+    }
 
     unsigned long getTargetNeuronControllerId() {
         return target_neuron_controller_id;

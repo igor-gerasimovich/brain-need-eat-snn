@@ -32,6 +32,7 @@ public:
         auto ph = neuron->getPowerHistory();
 
         matplotlibcpp::plot(ph);
+        matplotlibcpp::title(std::to_string(neuron->getId()));
         matplotlibcpp::show();
     }
 };

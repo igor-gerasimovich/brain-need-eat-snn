@@ -35,6 +35,9 @@ public:
         return current_potential;
     }
     void setCurrentPotential(int new_potential) {
+        if (id == 0) {
+            std::cout << "New potential: " << new_potential << std::endl;
+        }
         current_potential = new_potential;
     }
 

@@ -56,6 +56,8 @@ public:
 
     void addNeuronConnection(NeuronController* neuron_controller, unsigned long targetNeuronControllerId);
     void addSignal(Signal signal);
+
+    void proceedBaseLevelRecovery();
 };
 
 

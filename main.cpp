@@ -8,7 +8,7 @@ int main() {
 
     brain.proceed();
 
-    auto testNeuron = brain.ncr.controllers[0].getNeuron();
+    auto testNeuron = brain.ncr.controllers[5].getNeuron();
 
     Drawer::drawNeuronSpikesHistory(testNeuron);
     Drawer::drawNeuronPowerHistory(testNeuron);

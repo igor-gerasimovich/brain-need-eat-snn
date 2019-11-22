@@ -9,15 +9,18 @@
 void Brain::proceed() {
     while (true) {
         tkr.incrementTick();
-        // std::cout << "Tick " << tkr.getCurrentTick()->getTickNumber() << std::endl;
 
         for(auto &controller: ncr.controllers) {
             controller.proceedTick(tkr.getCurrentTick());
         }
 
-        if (tkr.getCurrentTick()->getTickNumber() % 5 == 0) {
-            ncr.controllers[0].addSignal(Signal(100, 0));
-            ncr.controllers[3].addSignal(Signal(300, 0));
+        if (tkr.getCurrentTick()->getTickNumber() == 1) {
+            ncr.controllers[0].addSignal(Signal(600, 0));
+            ncr.controllers[1].addSignal(Signal(600, 0));
+            ncr.controllers[2].addSignal(Signal(600, 0));
+        }
+        if (tkr.getCurrentTick()->getTickNumber() == 9) {
+            ncr.controllers[0].addSignal(Signal(600, 0));
         }
 
 

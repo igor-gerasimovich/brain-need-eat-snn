@@ -15,6 +15,6 @@ unsigned long const MAX_CONNECTIONS_PER_NEURON = 500;
 // In future must be recalculated for each neuron
 int const SPIKE_GENERATION_LEVEL = 500;
 unsigned long const SLEEP_AFTER_SPIKE_TICKS_COUNT = 2;
-int const POWER_LOSS_PER_TICK = 100;
+int const POWER_BASE_LEVEL_RECOVERY_PER_TICK = 50;
 
 #endif //BRAIN_NEED_EAT_CONSTANTS_H

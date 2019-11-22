@@ -17,18 +17,14 @@ void NeuronController::proceedTick(Tick* tick) {
     appendSignalsQueue();
     clearSignalsQueue();
 
-    int powerLoss = neuron->getCurrentPotential() - POWER_LOSS_PER_TICK;
-    appendSignal(Signal(std::max(powerLoss, BASE_NEURON_POTENTIAL), 0));
-
-    // std::cout << "NEURON: " << id << "; Current potential: " << neuron->getCurrentPotential() << "; Has spike? " << hasSpike() << std::endl;
     neuron->addToSpikeHistory(hasSpike());
     neuron->addToPowerHistory(neuron->getCurrentPotential());
-    if (hasSpike()) {
-        // std::cout << "NEURON: " << id << "; Has spike in controller: " << id << " with power " << neuron->getCurrentPotential() << std::endl;
 
+    if (hasSpike()) {
         proceedSpike(tick);
+    } else {
+        proceedBaseLevelRecovery();
     }
-    // std::cout << std::endl;
 }
 
 bool NeuronController::isDisabled(Tick* tick) {
@@ -77,8 +73,6 @@ void NeuronController::appendSignalsQueue() {
 }
 
 void NeuronController::appendSignal(Signal signal) {
-    // std::cout << "NEURON: " << id << "; Append signal from neuron: " << signal.getFomId() << " to neuron: " << id << " with power: " << signal.getPower() << std::endl;
-
     auto currentPotential = neuron->getCurrentPotential();
 
     neuron->setCurrentPotential(currentPotential + signal.getPower());
@@ -96,4 +90,34 @@ void NeuronController::appendSignal(Signal signal) {
 
 void NeuronController::resetNeuronPotential() {
     neuron->setCurrentPotential(BASE_NEURON_POTENTIAL);
+}
+
+void NeuronController::proceedBaseLevelRecovery() {
+    int resultPotential;
+
+    if (neuron->getCurrentPotential() == BASE_NEURON_POTENTIAL) {
+        return;
+    }
+
+    if (neuron->getCurrentPotential() > BASE_NEURON_POTENTIAL) {
+        resultPotential = neuron->getCurrentPotential() - POWER_BASE_LEVEL_RECOVERY_PER_TICK;
+        if (resultPotential < BASE_NEURON_POTENTIAL) {
+            neuron->setCurrentPotential(BASE_NEURON_POTENTIAL);
+            return;
+        }
+
+        neuron->setCurrentPotential(resultPotential);
+        return;
+    }
+
+    if (neuron->getCurrentPotential() < BASE_NEURON_POTENTIAL) {
+        resultPotential = neuron->getCurrentPotential() + POWER_BASE_LEVEL_RECOVERY_PER_TICK;
+        if (resultPotential > BASE_NEURON_POTENTIAL) {
+            neuron->setCurrentPotential(BASE_NEURON_POTENTIAL);
+            return;
+        }
+
+        neuron->setCurrentPotential(resultPotential);
+        return;
+    }
 }
