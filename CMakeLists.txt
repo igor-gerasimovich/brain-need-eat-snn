@@ -8,3 +8,5 @@ add_executable(brain_need_eat main.cpp classes/Brain.cpp classes/Brain.h classes
 find_package(PythonLibs 2.7)
 target_include_directories(brain_need_eat PRIVATE ${PYTHON_INCLUDE_DIRS})
 target_link_libraries(brain_need_eat ${PYTHON_LIBRARIES})
+
+add_subdirectory(tests)
