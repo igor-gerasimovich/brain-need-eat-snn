@@ -7,6 +7,7 @@
 
 #include "vector"
 #include "iostream"
+#include "../constants.h"
 
 class Neuron {
 private:
@@ -14,6 +15,7 @@ private:
     int current_potential = 0;
     unsigned long disabled_to_tick = 0;
     unsigned long repository_place = 0;
+    NeuronType type = NeuronTypeBasic;
 
     std::vector<bool> spikesHistory{};
     std::vector<int> powerHistory{};
@@ -34,6 +36,7 @@ public:
     int getCurrentPotential() {
         return current_potential;
     }
+
     void setCurrentPotential(int new_potential) {
         if (id == 0) {
             std::cout << "New potential: " << new_potential << std::endl;
@@ -69,6 +72,10 @@ public:
     }
     std::vector<int> getPowerHistory() {
         return powerHistory;
+    }
+
+    virtual NeuronType getType() const {
+        return NeuronTypeBasic;
     }
 };
 

@@ -11,26 +11,44 @@
 #include "../factories/NeuronFactory.h"
 
 class NeuronRepository {
+private:
+
+
 public:
-    std::vector<Neuron> neurons;
+    std::vector<Neuron*> neurons;
+    std::vector<Neuron> baseNeurons;
+    std::vector<ExcitatoryNeuron> excitatoryNeurons;
+    std::vector<InhibitoryNeuron> inhibitoryNeurons;
 
     explicit NeuronRepository() {
         neurons.reserve(MAX_NEURONS_COUNT);
+        baseNeurons.reserve(MAX_BASE_NEURONS_COUNT);
+        excitatoryNeurons.reserve(MAX_EXCITATORY_NEURONS_COUNT);
+        inhibitoryNeurons.reserve(MAX_INHIBITORY_NEURONS_COUNT);
     }
 
     Neuron* getNeuron(unsigned long id) {
-        return &neurons[id];
+        return neurons[id];
     }
 
-    unsigned long addNeuron(Neuron neuron) {
+    unsigned long createExcitatoryNeuron() {
+        ExcitatoryNeuron neuron = NeuronFactory::createExcitatoryNeuron();
         neuron.setId(neurons.size());
-        neurons.push_back(neuron);
+
+        excitatoryNeurons.push_back(neuron);
+        neurons.push_back(&excitatoryNeurons[neuron.getId()]);
 
         return neuron.getId();
     }
 
-    unsigned long createAndAddNeuron() {
-        return addNeuron(NeuronFactory::createNeuron());
+    unsigned long createInhibitoryNeuron() {
+        InhibitoryNeuron neuron = NeuronFactory::createInhibitoryNeuron();
+        neuron.setId(neurons.size());
+
+        inhibitoryNeurons.push_back(neuron);
+        neurons.push_back(&inhibitoryNeurons[neuron.getId()]);
+
+        return neuron.getId();
     }
 };
 

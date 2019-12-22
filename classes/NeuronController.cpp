@@ -36,7 +36,12 @@ bool NeuronController::hasSpike() {
 }
 
 void NeuronController::proceedSpike(Tick* tick) {
-    Signal generatedSignal = Signal(DEFAULT_NEURON_SPIKE_SIGNAL_POWER, id);
+    int power = DEFAULT_NEURON_SPIKE_SIGNAL_POWER;
+    if (neuron->getType() == NeuronTypeInhibitory) {
+        power = -power;
+    }
+
+    Signal generatedSignal = Signal(power, id);
     sendSignalToNeurons(generatedSignal);
 
     const unsigned long sleepToTick = SLEEP_AFTER_SPIKE_TICKS_COUNT + tick->getTickNumber();

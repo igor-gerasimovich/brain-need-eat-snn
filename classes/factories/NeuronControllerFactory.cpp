@@ -3,12 +3,10 @@
 //
 
 #include "NeuronControllerFactory.h"
-#include "NeuronFactory.h"
-#include "../repositories/NeuronConrollerRepository.h"
 #include "../repositories/NeuronRepository.h"
 
 NeuronController NeuronControllerFactory::createNeuronController(NeuronRepository* nr) {
-    unsigned long neuronId = nr->createAndAddNeuron();
+    unsigned long neuronId = nr->createExcitatoryNeuron();
 
     return NeuronController(nr->getNeuron(neuronId));
 }
