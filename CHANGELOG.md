@@ -1,3 +1,13 @@
+# 22.12.2019
+- Small changes for auto-connecting files in CmakeLists files.
+- Created new constants for repository storage sizes.
+- Updated NeuronController. If the neuron is Inhibitory spike power will be negated.
+- Created separated storage for Base, Inhibitory and Excitatory neurons.
+- Wrote tests for NeuronRepository and NeuronFactory based on Inhibitory and Excitatory neurons
+
+# 21.12.2019
+- Added tests functionality ( Google tests )
+
 # 06.11.2019
 - created simples neuron structure generator
 - created drawer class which works with matplotlib
