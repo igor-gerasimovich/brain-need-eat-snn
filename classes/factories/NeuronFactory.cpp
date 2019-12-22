@@ -7,3 +7,11 @@
 Neuron NeuronFactory::createNeuron() {
     return Neuron();
 }
+
+ExcitatoryNeuron NeuronFactory::createExcitatoryNeuron() {
+    return ExcitatoryNeuron();
+}
+
+InhibitoryNeuron NeuronFactory::createInhibitoryNeuron() {
+    return InhibitoryNeuron();
+}
