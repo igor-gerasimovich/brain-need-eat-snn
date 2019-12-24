@@ -50,9 +50,11 @@ void NeuronController::proceedSpike(Tick* tick) {
     neuron->setCurrentPotential(BASE_NEURON_POTENTIAL);
 }
 
-void NeuronController::addNeuronConnection(NeuronController* neuron_controller, unsigned long targetNeuronControllerId) {
-    neuron_controllers_aliases[targetNeuronControllerId] = neuron_controller;
-    neuron_connections.emplace_back(targetNeuronControllerId);
+void NeuronController::addNeuronConnection(NeuronController* neuron_controller) {
+    unsigned long toId = neuron_controller->getId();
+
+    neuron_controllers_aliases[toId] = neuron_controller;
+    neuron_connections.emplace_back(toId, getId());
 }
 
 void NeuronController::addSignal(Signal signal) {
@@ -63,7 +65,9 @@ void NeuronController::sendSignalToNeurons(Signal signal) {
     for(auto &connection: neuron_connections) {
         NeuronController* controller = neuron_controllers_aliases[connection.getTargetNeuronControllerId()];
 
-        controller->addSignal(signal);
+        Signal newSignal = connection.modifySignal(signal);
+
+        controller->addSignal(newSignal);
     }
 }
 

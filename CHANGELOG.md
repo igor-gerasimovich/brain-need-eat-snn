@@ -1,3 +1,11 @@
+# 24.12.2019
+- **Integrated functionality for multiplying signals between neurons.**
+  - changed addNeuronConnection function parameters (removed redundant id)
+  - updated NeuronConnection class structure
+  - created multiplying step in NeuronController
+  - now, Signal power can be setted
+  - wrote neuron connection tests
+
 # 22.12.2019
 - Small changes for auto-connecting files in CmakeLists files.
 - Created new constants for repository storage sizes.

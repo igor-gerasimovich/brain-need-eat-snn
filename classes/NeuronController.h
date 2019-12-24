@@ -54,7 +54,7 @@ public:
     void proceedSpike(Tick* tick);
     bool isDisabled(Tick* tick);
 
-    void addNeuronConnection(NeuronController* neuron_controller, unsigned long targetNeuronControllerId);
+    void addNeuronConnection(NeuronController* neuron_controller);
     void addSignal(Signal signal);
 
     void proceedBaseLevelRecovery();

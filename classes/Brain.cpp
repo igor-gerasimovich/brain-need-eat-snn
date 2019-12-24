@@ -45,7 +45,7 @@ void Brain::createStructure(int levels, int neuronsPerLevel) {
                 NeuronController* fromNC = &ncr.controllers[ (i * neuronsPerLevel) + j ];
                 NeuronController* toNC = &ncr.controllers[ ((i + 1) * neuronsPerLevel) + k ];
 
-                fromNC->addNeuronConnection(toNC, toNC->getId());
+                fromNC->addNeuronConnection(toNC);
             }
         }
     }
