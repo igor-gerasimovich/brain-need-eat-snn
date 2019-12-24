@@ -17,6 +17,10 @@ public:
         return power;
     }
 
+    void setPower(int newPower) {
+        power = newPower;
+    }
+
     long unsigned getFomId() {
         return fromId;
     }
