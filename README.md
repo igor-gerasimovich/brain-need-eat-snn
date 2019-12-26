@@ -6,6 +6,6 @@
 
 Some pattern of SNN
 
-![Animal structure](./gh_img/animal_structure.png)
+![Animal structure](./gh_img/brain.png)
 
 ----
